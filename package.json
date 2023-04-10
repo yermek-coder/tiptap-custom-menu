@@ -9,11 +9,9 @@
     "generate": "nuxt generate"
   },
   "dependencies": {
-    "@tiptap/pm": "^2.0.2",
-    "@tiptap/starter-kit": "^2.0.2",
-    "@tiptap/vue-2": "^2.0.2",
     "core-js": "^3.25.3",
     "nuxt": "^2.15.8",
+    "tiptap-vuetify": "^2.24.0",
     "vue": "^2.7.10",
     "vue-server-renderer": "^2.7.10",
     "vue-template-compiler": "^2.7.10",
