@@ -1,6 +1,6 @@
 import Vue from "vue";
-import { TiptapVuetifyPlugin } from "../vendors/custom-extension/bundle-esm";
-import "../vendors/custom-extension/main.css";
+import { TiptapVuetifyPlugin } from "../vendors/tiptap/bundle-esm";
+import "../vendors/tiptap/main.css";
 
 export default ({ app }) => {
   Vue.use(TiptapVuetifyPlugin, {

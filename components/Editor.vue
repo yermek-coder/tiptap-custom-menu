@@ -30,9 +30,8 @@ import {
   HardBreak,
   HorizontalRule,
   History,
-} from "../vendors/custom-extension/bundle-esm";
-
-// console.log("CustomExtension", new CustomExtension());
+  Snippets,
+} from "../vendors/tiptap/bundle-esm";
 
 export default {
   // specify TiptapVuetify component in "components"
@@ -41,6 +40,29 @@ export default {
     // declare extensions you want to use
     extensions: [
       History,
+      [
+        Snippets,
+        {
+          options: {
+            list: [
+              {
+                title: "Item 1",
+                value:
+                  "Lorem ipsum dolor sit amet consectetur, adipisicing elit",
+              },
+              {
+                title: "Item 2",
+                value: "Modi similique dolorem, architecto velit libero",
+              },
+              {
+                title: "Item 3",
+                value:
+                  "voluptatem iste fugit repudiandae tempore atque cumque inventore quaerat accusamus alias ullam quos error ratione officiis",
+              },
+            ],
+          },
+        },
+      ],
       Blockquote,
       Link,
       Underline,
