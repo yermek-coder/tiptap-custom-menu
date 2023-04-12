@@ -63,6 +63,7 @@ export default {
                   onClick: this.appendContent,
                 },
               ],
+              tooltip: "some tooltip",
             },
           },
         ],
