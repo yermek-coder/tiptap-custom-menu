@@ -36,61 +36,72 @@ import {
 export default {
   // specify TiptapVuetify component in "components"
   components: { TiptapVuetify },
-  data: () => ({
-    // declare extensions you want to use
-    extensions: [
-      History,
-      [
-        Snippets,
-        {
-          options: {
-            list: [
-              {
-                title: "Item 1",
-                value:
-                  "Lorem ipsum dolor sit amet consectetur, adipisicing elit",
-              },
-              {
-                title: "Item 2",
-                value: "Modi similique dolorem, architecto velit libero",
-              },
-              {
-                title: "Item 3",
-                value:
-                  "voluptatem iste fugit repudiandae tempore atque cumque inventore quaerat accusamus alias ullam quos error ratione officiis",
-              },
-            ],
+  data() {
+    return {
+      extensions: [
+        History,
+        [
+          Snippets,
+          {
+            options: {
+              list: [
+                {
+                  title: "Item 1",
+                  content:
+                    "Lorem ipsum dolor sit amet consectetur, adipisicing elit",
+                  onClick: this.appendContent,
+                },
+                {
+                  title: "Item 2",
+                  content: "Modi similique dolorem, architecto velit libero",
+                  onClick: this.appendContent,
+                },
+                {
+                  title: "Item 3",
+                  content:
+                    "voluptatem iste fugit repudiandae tempore atque cumque inventore quaerat accusamus alias ullam quos error ratione officiis",
+                  onClick: this.appendContent,
+                },
+              ],
+            },
           },
-        },
-      ],
-      Blockquote,
-      Link,
-      Underline,
-      Strike,
-      Italic,
-      ListItem,
-      BulletList,
-      OrderedList,
-      [
-        Heading,
-        {
-          options: {
-            levels: [1, 2, 3],
+        ],
+        Blockquote,
+        Link,
+        Underline,
+        Strike,
+        Italic,
+        ListItem,
+        BulletList,
+        OrderedList,
+        [
+          Heading,
+          {
+            options: {
+              levels: [1, 2, 3],
+            },
           },
-        },
+        ],
+        Bold,
+        Link,
+        Code,
+        HorizontalRule,
+        Paragraph,
+        HardBreak,
       ],
-      Bold,
-      Link,
-      Code,
-      HorizontalRule,
-      Paragraph,
-      HardBreak,
-    ],
-    // starting editor's content
-    content: `
+      // starting editor's content
+      content: `
       <h1>Yay Headlines!</h1>
       <p>All these <strong>cool tags</strong> are working now.</p>
     `,
-  }),
+    };
+  },
+  methods: {
+    appendContent({ editor, content }) {
+      const { size } = editor.view.state.doc.content;
+      const transaction = editor.state.tr.insertText(content, size);
+      editor.view.dispatch(transaction);
+    },
+  },
 };
 </script>
