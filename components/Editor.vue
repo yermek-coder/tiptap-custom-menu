@@ -5,6 +5,7 @@
       v-model="content"
       :extensions="extensions"
       :toolbar-attributes="{ color: 'black' }"
+      id="id-we-need"
     />
 
     <template #placeholder> Loading... </template>
@@ -64,6 +65,7 @@ export default {
                 },
               ],
               tooltip: "some tooltip",
+              iconSrc: require("~/assets/ai-blue.jpg"),
             },
           },
         ],
@@ -98,10 +100,21 @@ export default {
     };
   },
   methods: {
-    appendContent({ editor, content }) {
-      const { size } = editor.view.state.doc.content;
-      const transaction = editor.state.tr.insertText(content, size);
-      editor.view.dispatch(transaction);
+    appendContent({ editor }) {
+      const words = "lorem ipsum dolor sit amet".split(" ");
+      words.forEach((word, index) => {
+        const { size } = editor.view.state.doc.content;
+        const transaction = editor.state.tr.insertText(
+          " " + word,
+          size - (index === 0 ? 0 : 1)
+        );
+        editor.view.dispatch(transaction);
+      });
+
+      // the ID
+      const editorEl = editor.view.dom;
+      const ID = editorEl.closest(".tiptap-vuetify-editor").getAttribute("id");
+      console.log("ID", ID);
     },
   },
 };
