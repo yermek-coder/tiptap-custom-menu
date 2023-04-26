@@ -114,7 +114,7 @@ export default {
           content = content.substring(0, content.length - 4);
         }
 
-        editor.setContent(content + (firstWord ? "" : " ") + word);
+        editor.setContent(content + (index === 0 ? "" : " ") + word);
       });
 
       // the ID
