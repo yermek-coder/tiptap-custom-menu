@@ -101,20 +101,26 @@ export default {
   },
   methods: {
     appendContent({ editor }) {
-      const words = "1. apple\n2. orange\n3. grape".split(" ");
+      const words = "1. apple \n 2. orange \n 3. grape".split(" ");
       words.forEach((word, index) => {
-        if (word.includes("\n")) {
-          word = word.replace("\n", "<br>");
-        }
-        let content = editor.getHTML();
-        if (index !== 0) {
-          // insert new content inside last paragraph if one exists.
-          // without this new p tag will be created each time we insert,
-          // but we only need it once.
-          content = content.substring(0, content.length - 4);
-        }
+        const { size } = editor.view.state.doc.content;
+        const firstWord = index === 0;
+        const transaction = editor.state.tr.insertText(
+          (firstWord ? "" : " ") + word,
+          size - (firstWord ? 0 : 1)
+        );
+        editor.view.dispatch(transaction);
+      });
 
-        editor.setContent(content + (index === 0 ? "" : " ") + word);
+      // TODO: replace all \n with <p></p>. Make sure this.content is updated
+      // Don't use this.content = editor.content
+      let content = editor.getHTML();
+      console.dir(content);
+      content = content.replace(/\n/g, "<br>");
+      editor.setContent(content, true);
+
+      this.$nextTick(() => {
+        editor.focus();
       });
 
       // the ID
